@@ -1,0 +1,43 @@
+
+To complete Lab 5 as described, you'll need to follow several steps involving creating a new repository on GitHub, adding an HTML file, setting up a CI/CD pipeline using GitHub Actions, and then submitting your work on Blackboard. Here's a step-by-step guide:
+
+Step 1: Create a New Repository for Lab 5
+Log in to your GitHub account.
+Click on the "+" icon in the top right corner and select "New repository."
+Name the repository (e.g., "lab5-yourfullname").
+Initialize the repository with a README file (optional).
+Create the repository.
+Step 2: Add a New HTML File
+Clone the repository to your local machine.
+Create a new HTML file named lab5_yourfullname.html.
+Add content to the HTML file. This could be a basic HTML structure with some personal information or course-related content.
+Commit the file to your local repository and push it to GitHub.
+Step 3: Set Up CI/CD with GitHub Actions
+In your GitHub repository, create a new file in the .github/workflows directory.
+
+Name it something like ci-cd.yml.
+
+Add the CI/CD code to this file. Here’s a basic example of what the code might look like:
+
+yaml
+Copy code
+name: Deploy to FTP Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        ftp-server: ftp://shivaprogramming.com/
+        ftp-username: ${{ secrets.ftp_username }}
+        ftp-password: ${{ secrets.ftp_password }}
+        local-dir: public/
